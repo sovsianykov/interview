@@ -1,7 +1,7 @@
 import { apiAction } from "./actions";
 import { takeEvery, put, call } from "redux-saga/effects";
 import axios from "axios";
-import {DELETE_lIST, FETCH_DATA, POST_LIST} from "./types";
+import { DELETE_lIST, FETCH_DATA, POST_LIST} from "./types";
 
 export function* watchFetch() {
     yield takeEvery( FETCH_DATA, fetchWorkerAsync);
@@ -32,13 +32,14 @@ function* postWorkerAsync({ url,body }) {
     }
 }
 
-function* deleteWorkerAsync({ url,id }) {
+function* deleteWorkerAsync({ id }) {
     try {
+
         yield put(apiAction.fetchStart());
-        const data = yield call(() => {
-            return axios.delete(url,id).then((res) => res.data);
+         yield call(() => {
+            return axios.delete(id).then(res => console.log(res.data));
         });
-        yield put(apiAction.fetchSuccess(data));
+        // yield put(apiAction.fetchSuccess(data));
     } catch (error) {
         yield put(apiAction.errorMessage());
     }

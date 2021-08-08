@@ -2,7 +2,7 @@ import {DELETE_lIST, FETCH_LISTS, FETCH_START, POST_LIST} from "./types";
 
 const InitialState = {
     isLoading : false,
-    lists : [],
+    lists : {},
     error: null
 }
 
