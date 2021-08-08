@@ -1,0 +1,26 @@
+.paginator {
+  width: 240px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  .item {
+    width: 15px;
+    height: 20px;
+    font-size: 18px;
+    color: #ece0e0;
+    font-weight: 200;
+    border-bottom: 2px solid transparent;
+    transition: .4s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &_active {
+      color: #1d1616;
+      font-weight: 500;
+      border-bottom: 2px solid black;
+    }
+  }
+}

@@ -1,18 +1,24 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {apiAction} from "../../redux/actions";
 import {Grid} from "@material-ui/core";
+import Paginator from "../Pgnator/Paginator";
+import ListCard from "./ListCard";
+import styles from "./List.module.scss"
 
 const Lists = () => {
+    const [activeId, setActiveId] = useState(1)
   const dispatch = useDispatch()
 
   useEffect(()=>{
 
-    dispatch(apiAction.fetchData('6'))
+    dispatch(apiAction.fetchData(activeId.toString()))
 
-  },[dispatch])
+  },[activeId, dispatch])
   const {lists ,isLoading, error } = useSelector(state =>state.apiReducer)
     console.log(useSelector(state =>state.apiReducer))
+
+
   if (isLoading) {
     return (
         <div>
@@ -27,12 +33,24 @@ const Lists = () => {
         </div>
     );
   }
+   const pages = [1,2,3,4,5,6 ]
     return (
-        <div>
-          <Grid container>
-            { lists ? lists.results.length:'mistake' }
+        <section className={styles.list}>
+            <Paginator pages={pages} activeId={activeId} onClick={(id) =>setActiveId(id) }/>
+          <Grid container spacing={3} >
+            { lists  ?
+                lists.results.map(list => (
+                    <Grid xs={12} sm={3} item key={list.id}>
+                    <ListCard
+                              name={list.name}
+                              description={list.description}
+                              id={list.id}
+                    />
+                    </Grid>
+                ))
+                :'mistake' }
           </Grid>
-        </div>
+        </section>
     );
 };
 

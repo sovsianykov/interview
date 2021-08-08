@@ -8,13 +8,9 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+        minWidth: 225,
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
+
     title: {
         fontSize: 14,
     },
@@ -23,31 +19,23 @@ const useStyles = makeStyles({
     },
 });
 
-export default function ListCard() {
+export default function ListCard({name,description,id}) {
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
 
     return (
         <Card className={classes.root}>
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    Word of the Day
+                    {name}
                 </Typography>
-                <Typography variant="h5" component="h2">
-                    be{bull}nev{bull}o{bull}lent
+                <Typography variant="subtitle1" component="h2">
+                    {description}
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
-                </Typography>
+                list id {id}
             </CardContent>
-            <CardActions>
-                <Button size="small">Learn More</Button>
-            </CardActions>
+            {/*<CardActions>*/}
+            {/*    <Button size="small">Learn More</Button>*/}
+            {/*</CardActions>*/}
         </Card>
     );
 }
